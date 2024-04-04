@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+  background-color: #f0f0f0;
+
+}
+
+#title {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#login-form {
+  max-width: 330px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+}
+
+#login-form h2 {
+  text-align: center;
+  color: black;
+  margin-top: 10px;
+}
+#login-form label{
+  display: block;
+  margin-bottom: -5px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+#login-form input[type="text"],#login-form input[type="password"]{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#login-form input[type="submit"]{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  background-color: #007BFF;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+#login-form img{
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+#login-form p{
+  text-align: center;
+  margin-top: 10px;
+  color: red;
+  font-weight: bold;
+}
+.forget-password{
+  text-align: right;
+  margin-top: 10px;
+}
+.forget-password a{
+  text-decoration: none;
+  color: #007BFF;
+}

@@ -1,0 +1,55 @@
+.pass-text {
+  margin: 0 auto;
+  background-color: #007BFF;
+  max-width: 330px;
+  border-radius: 2px;
+}
+
+.pass-text p {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+
+#password-form {
+  max-width: 330px;
+  margin: 0 auto;
+  margin-top: 5px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+}
+
+#password-form label span {
+  color: red;
+}
+
+input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.container-fluid #password-form label {
+  display: block;
+  margin-bottom: -30px;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+#password-form input[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  background-color: #007BFF;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
