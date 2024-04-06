@@ -21,21 +21,21 @@ class UserController
       header("Location: ../index.php");
       exit();
     }
-    if (strlen($username) < 10  || strlen($password) > 30) {
-      $_SESSION["thongbao"] = "Tên đăng nhập và mật khẩu không đúng";
+    if (strlen($username) >= 10  && strlen($username) <= 15) {
+      $_SESSION["thongbao"] = "Hãy nhập tên người dùng từ 10 đến 15 ký tự";
       header("Location: ../index.php");
       exit();
     }
-    if (strlen($password) > 10  || strlen($password) < 15) {
+    if (strlen($password) >= 10  && strlen($password) <= 15) {
       if (preg_match('/[A-Z]/', $password) && preg_match('/[^\w]/', $password)) {
         return true;
       } else {
-        $_SESSION["thongbao"] = "Tên đăng nhập và mật khẩu không đúng";
+        $_SESSION["thongbao"] = "Mật khẩu phải có ít nhất một chữ hoa và một ký tự đặc biệt";
         header("Location: ../index.php");
         exit();
       }
     } else {
-      $_SESSION["thongbao"] = "Tên đăng nhập và mật khẩu không đúng";
+      $_SESSION["thongbao"] = "Hãy nhập mật khẩu từ 10 đến 15 ký tự";
       header("Location: ../index.php");
       exit();
     }
