@@ -87,10 +87,8 @@ if (!isset($_SESSION['login'])) {
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Custom Utilities:</h6>
-                            <a class="collapse-item" href="utilities-color.php">Colors</a>
-                            <a class="collapse-item" href="utilities-border.php">Borders</a>
-                            <a class="collapse-item" href="utilities-animation.php">Animations</a>
-                            <a class="collapse-item" href="utilities-other.php">Other</a>
+                            <a class="collapse-item" href="qly_gv.php">Giảng Viên</a>
+                            <a class="collapse-item" href="ds_gv.php">Danh sách GV</a>
                         </div>
                     </div>
                 </li>

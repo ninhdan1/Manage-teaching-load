@@ -53,7 +53,7 @@ if (!isset($_SESSION['login'])) {
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-           
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -79,18 +79,16 @@ if (!isset($_SESSION['login'])) {
                 </div>
             </li>
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                    <i class="bi bi-person-circle"></i>
+                    <span>Giảng Viên</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.php">Colors</a>
-                        <a class="collapse-item" href="utilities-border.php">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.php">Animations</a>
-                        <a class="collapse-item" href="utilities-other.php">Other</a>
+                        <a class="collapse-item " href="qly_gv.php">Giảng Viên</a>
+                        <a class="collapse-item " href="ds_gv.php">Danh sách GV</a>
                     </div>
                 </div>
             </li>
@@ -310,26 +308,26 @@ if (!isset($_SESSION['login'])) {
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?=$_SESSION['username'] ?></span>
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION['username'] ?></span>
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
                                 </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Profile
-                                    </a>
-                                    <a class="dropdown-item" href="../change-password.php">
-                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Đổi mật khẩu
-                                    </a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="../../logout.php" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Đăng xuất
-                                    </a>
-                                </div>
-                            </li>
+                                <a class="dropdown-item" href="../change-password.php">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Đổi mật khẩu
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="../../logout.php" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Đăng xuất
+                                </a>
+                            </div>
+                        </li>
 
                     </ul>
 

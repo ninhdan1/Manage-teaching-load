@@ -16,12 +16,17 @@ class UserController
   {
     $username = isset($_POST["username"]) ? $_POST["username"] : "";
     $password = isset($_POST["password"]) ? $_POST["password"] : "";
-    if ($username == "" || $password == "") {
-      $_SESSION["thongbao"] = "Vui lòng nhập đầy đủ thông tin đăng nhập";
+    if ($username == "") {
+      $_SESSION["thongbao"] = "Vui lòng nhập tài khoản";
       header("Location: ../index.php");
       exit();
     }
-    if (strlen($username) >= 10  && strlen($username) <= 15) {
+    if ($password == "") {
+      $_SESSION["thongbao"] = "Vui lòng nhập mật khẩu";
+      header("Location: ../index.php");
+      exit();
+    }
+    if (strlen($username) <= 10  && strlen($username) >= 15) {
       $_SESSION["thongbao"] = "Hãy nhập tên người dùng từ 10 đến 15 ký tự";
       header("Location: ../index.php");
       exit();

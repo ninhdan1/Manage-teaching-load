@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quản lý khối lượng giảng dạy khoa CNTT</title>
   <link rel="stylesheet" href="../css/style.css">
+  <script>
+    src = '../js/login.js'
+  </script>
 </head>
 
 <body>
@@ -36,9 +39,7 @@
       </p>
       <input type="submit" id="loginButton" value="Đăng nhập" disabled>
     </form>
-    <script>
-      src = '../js/login.js'
-    </script>
+    <script src="../js/login.js"></script>
   </div>
 </body>
 
