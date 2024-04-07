@@ -61,10 +61,10 @@ body {
   border-radius: 50%;
 }
 #login-form p{
-  text-align: center;
   margin-top: 10px;
   color: red;
   font-weight: bold;
+  font-size: 15px;
 }
 .forget-password{
   text-align: right;

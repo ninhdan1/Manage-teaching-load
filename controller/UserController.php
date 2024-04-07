@@ -17,17 +17,17 @@ class UserController
     $username = isset($_POST["username"]) ? $_POST["username"] : "";
     $password = isset($_POST["password"]) ? $_POST["password"] : "";
     if ($username == "") {
-      $_SESSION["thongbao"] = "Vui lòng nhập tài khoản";
+      $_SESSION["thongbao_user"] = "Vui lòng nhập tài khoản";
       header("Location: ../index.php");
       exit();
     }
     if ($password == "") {
-      $_SESSION["thongbao"] = "Vui lòng nhập mật khẩu";
+      $_SESSION["thongbao_pass"] = "Vui lòng nhập mật khẩu";
       header("Location: ../index.php");
       exit();
     }
-    if (strlen($username) <= 10  && strlen($username) >= 15) {
-      $_SESSION["thongbao"] = "Hãy nhập tên người dùng từ 10 đến 15 ký tự";
+    if (strlen($username) <= 10  || strlen($username) >= 15) {
+      $_SESSION["thongbao_user"] = "Hãy nhập tên người dùng từ 10 đến 15 ký tự";
       header("Location: ../index.php");
       exit();
     }
@@ -35,12 +35,12 @@ class UserController
       if (preg_match('/[A-Z]/', $password) && preg_match('/[^\w]/', $password)) {
         return true;
       } else {
-        $_SESSION["thongbao"] = "Mật khẩu phải có ít nhất một chữ hoa và một ký tự đặc biệt";
+        $_SESSION["thongbao_pass"] = "Mật khẩu phải có ít nhất một chữ hoa và một ký tự đặc biệt";
         header("Location: ../index.php");
         exit();
       }
     } else {
-      $_SESSION["thongbao"] = "Hãy nhập mật khẩu từ 10 đến 15 ký tự";
+      $_SESSION["thongbao_pass"] = "Hãy nhập mật khẩu từ 10 đến 15 ký tự";
       header("Location: ../index.php");
       exit();
     }
