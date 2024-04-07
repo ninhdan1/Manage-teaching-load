@@ -5,7 +5,7 @@ usernameInput.addEventListener("input", ButtonState);
 passwordInput.addEventListener("input", ButtonState);
 
 function ButtonState() {
-  if (usernameInput.value.trim() !== "" || passwordInput.value.trim() !== "") {
+  if (usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "") {
     loginButton.disabled = false;
   } else {
     loginButton.disabled = true;

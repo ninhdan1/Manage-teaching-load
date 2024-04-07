@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,27 +23,20 @@ session_start();
     <form action="/controller/UserController.php?action=login" method="post" name="form-login">
       <label for="username">Tài khoản</label><br>
       <input type="text" id="username" name="username" placeholder="Vui lòng nhập tài khoản ..."><br>
-      <p class="thongbao">
-        <?php
-        if (isset($_SESSION["thongbao_user"])) {
-          echo $_SESSION["thongbao_user"];
-          unset($_SESSION["thongbao_user"]);
-        }
-        ?>
-      </p>
       <label for="password">Mật khẩu</label><br>
       <input type="password" id="password" name="password" placeholder="Vui lòng nhập mật khẩu ..."><br>
-      <p class="thongbao">
-        <?php
-        if (isset($_SESSION["thongbao_pass"])) {
-          echo $_SESSION["thongbao_pass"];
-          unset($_SESSION["thongbao_pass"]);
-        }
-        ?>
-      </p>
       <div class="forget-password">
         <a href="#" onclick="alert('Vui lòng liên hệ với phòng ban khoa công nghệ thông tin')">Quên mật khẩu ?</a>
       </div>
+      <p>
+        <?php
+        session_start();
+        if (isset($_SESSION["thongbao"])) {
+          echo $_SESSION["thongbao"];
+          unset($_SESSION["thongbao"]);
+        }
+        ?>
+      </p>
       <input type="submit" id="loginButton" value="Đăng nhập" disabled>
     </form>
     <script src="../js/login.js"></script>
