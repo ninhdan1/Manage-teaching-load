@@ -31,6 +31,3 @@ class User
   }
 }
 
-// $dbConnect = new DBConnect();
-// $user = new User($dbConnect->getConnection());
-// $user->getUser('trong_phat@gmail.com', '123456789');
