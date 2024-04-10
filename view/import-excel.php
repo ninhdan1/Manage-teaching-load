@@ -61,13 +61,19 @@ $content = '
                 <label for="fileToUpload" class="font-weight-bold d-inline-block"><i class="bi bi-file-excel"></i> Chọn
                     tệp Excel để nhập:</label>
                 <input type="file" class="form-control form-control-lg" name="fileToUpload" id="fileToUpload"
-                    accept=".xls,.xlsx" required>
+                     required>
                 <div class="invalid-feedback">Bạn chưa nhập file excel!</div>
             </div>
 
             <div class="d-flex justify-content-center">
 
-                <button type="submit" class="btn btn-success btn-icon-split me-2 btn-sm">
+
+                <button id="loadingButton" class="btn btn-warning me-2 btn-sm" type="button" disabled style="display: none;">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Chờ trong giây lát...
+                 </button>
+
+                <button id="importButton" type="submit" class="btn btn-success btn-icon-split me-2 btn-sm">
                     <span class="icon text-white">
                         <i class="bi bi-download"></i>
                     </span>

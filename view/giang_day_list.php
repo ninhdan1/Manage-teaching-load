@@ -1,9 +1,5 @@
 <?php
 
-// if (!isset($_SESSION['login'])) {
-//     header("Location: ../view/login.php");
-//     exit();
-// }
 
 $content = '
 <div class="card shadow mb-4">
@@ -28,7 +24,7 @@ if (isset($data)) {
     foreach ($data as $item) {
         $content .= '
         <tr>
-            <td>' . $item['ma_lopmonhoc'] . '</td>
+            <td>' . $item['ma_lichday'] . '</td>
             <td>' . $item['ten_phong'] . '</td>
             <td>' . $item['ma_monhoc'] . '</td>
             <td>' . $item['ma_lophoc'] . '</td>

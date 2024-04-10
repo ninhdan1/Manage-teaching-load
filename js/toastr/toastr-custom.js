@@ -3,12 +3,18 @@ $(document).ready(function(){
         event.preventDefault();
 
         var formData = new FormData(this);
+        $("#loadingButton").show();
+        $("#importButton").hide();
 
         $.ajax({
             url: '../controller/ImportFileExcelController.php?action=import',
             type: 'POST',
             data: formData,
             success: function(data){
+
+                $("#loadingButton").hide();
+                $("#importButton").show();
+
                 // Kiểm tra dữ liệu trả về từ máy chủ
                 if (data.indexOf("success") !== -1) {
                     toastr.success('Import dữ liệu thành công!', { timeOut: 5000 });
@@ -22,6 +28,8 @@ $(document).ready(function(){
                 }
             },
             error: function(xhr, status, error){
+                $("#loadingButton").hide();
+                $("#importButton").show();
                 toastr.error('Có lỗi xảy ra: ' + error, { timeOut: 5000 });
             },
             cache: false,
