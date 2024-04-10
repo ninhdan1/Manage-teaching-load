@@ -28,7 +28,7 @@ if (isset($data)) {
     foreach ($data as $item) {
         $content .= '
         <tr>
-            <td>' . $item['ma_lichday'] . '</td>
+            <td>' . $item['ma_lopmonhoc'] . '</td>
             <td>' . $item['ten_phong'] . '</td>
             <td>' . $item['ma_monhoc'] . '</td>
             <td>' . $item['ma_lophoc'] . '</td>
