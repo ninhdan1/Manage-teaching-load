@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['login'])) {
-    header("Location: ../login.php");
+    header("Location: /view/login.php");
     exit();
 }
 
@@ -38,6 +38,8 @@ if (!isset($_SESSION['login'])) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
 
 
     </head>
@@ -48,7 +50,7 @@ if (!isset($_SESSION['login'])) {
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <?php require __DIR__. '/../components/sidebar.php'?>
+            <?php require __DIR__ . '/../components/sidebar.php' ?>
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
@@ -58,7 +60,7 @@ if (!isset($_SESSION['login'])) {
                 <div id="content">
 
                     <!-- Topbar -->
-                    <?php require __DIR__. '/../components/navbar.php'?>
+                    <?php require __DIR__ . '/../components/navbar.php' ?>
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
@@ -72,7 +74,7 @@ if (!isset($_SESSION['login'])) {
                 </div>
                 <!-- End of Main Content -->
 
-                <?php require __DIR__. '/../components/footer.php'?>
+                <?php require __DIR__ . '/../components/footer.php' ?>
 
             </div>
 
@@ -130,6 +132,15 @@ if (!isset($_SESSION['login'])) {
         <script src="js/demo/chart-pie-demo.js"></script>
 
         <script src="/js/toastr/toastr-custom.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- DataTables JS -->
+        <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
+        <script>
+        $(document).ready(function() {
+            $("#myTable").DataTable();
+        });
+        </script>
 
 
     </body>

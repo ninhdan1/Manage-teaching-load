@@ -49,7 +49,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Quản lý giảng dạy:</h6>
                 <a class="collapse-item" href="/view/import-excel.php">Import file excel</a>
-                <a class="collapse-item" href="#">Danh sách giảng dạy</a>
+                <a class="collapse-item" href="/controller/giangdaycontroller.php">Danh sách giảng dạy</a>
             </div>
         </div>
 

@@ -1,15 +1,7 @@
 <?php
 
-
-if (!isset($_SESSION['login'])) {
-    header("Location: ../view/login.php");
-    exit();
-}
-
-
-
 $currentYear = date("Y");
-$content ='
+$content = '
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Giảng dạy</h1>
 </div>
@@ -41,7 +33,7 @@ $content ='
                                 <label for="namHoc" class="font-weight-bold d-inline-block">Năm học:</label>
                                 <input type="number" placeholder="" class="form-control" name="namHoc" id="namHoc"
                                     required min="1900" max="3000" minlength="4" maxlength="4"
-                                    value="' .$currentYear. '" onchange="updateNextYear()" onblur="validateYearInput()">
+                                    value="' . $currentYear . '" onchange="updateNextYear()" onblur="validateYearInput()">
                                 <div class="invalid-feedback">
                                     Hãy nhập năm học!.
                                 </div>
@@ -52,7 +44,7 @@ $content ='
                             <div class="form-group input-group-sm has-validation">
                                 <label for="namHoc"></label>
                                 <input type="number" placeholder="" readonly class="form-control" name="namHoc2"
-                                    id="namHoc2" required min="1900" max="3000" value="' .($currentYear + 1) . '">
+                                    id="namHoc2" required min="1900" max="3000" value="' . ($currentYear + 1) . '">
                                 <div class="invalid-feedback">
                                     Hãy nhập năm học!.
                                 </div>
@@ -122,5 +114,4 @@ function validateYearInput() {
 ';
 
 
-include '../view/admin/layout-admin.php'
-?>
+include '../view/admin/layout-admin.php';
