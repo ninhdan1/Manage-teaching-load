@@ -22,8 +22,7 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-            aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
             <i class="bi bi-people"></i>
             <span>Tài khoản</span>
         </a>
@@ -39,17 +38,16 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImportExcel"
-            aria-expanded="true" aria-controls="collapseImportExcel">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImportExcel" aria-expanded="true" aria-controls="collapseImportExcel">
             <i class="bi bi-upload"></i>
             <span>Giảng dạy</span>
         </a>
-        <div id="collapseImportExcel" class="collapse" aria-labelledby="headingImportExcel"
-            data-parent="#accordionSidebar">
+        <div id="collapseImportExcel" class="collapse" aria-labelledby="headingImportExcel" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Quản lý giảng dạy:</h6>
+                <h6 class="collapse-header">Quản lý giảng dạy</h6>
                 <a class="collapse-item" href="/view/import-excel.php">Import file excel</a>
-                <a class="collapse-item" href="/controller/giangdaycontroller.php">Danh sách giảng dạy</a>
+                <a class="collapse-item" href="/controller/giangdaycontroller.php?action=index">Danh sách giảng dạy</a>
+                <a class="collapse-item" href="#">Quản lý môn học</a>
             </div>
         </div>
 
@@ -58,8 +56,7 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-            aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
             <i class="bi bi-person-circle"></i>
             <span>Giảng Viên</span>
         </a>
@@ -82,8 +79,7 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-            aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
             <span>Tài Khoản</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">

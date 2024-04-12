@@ -116,7 +116,7 @@ function validateYearInput() {
     }
 }
 </script>
-
+<script src="/js/toastr/toastr-custom.js"></script>
 ';
 
 

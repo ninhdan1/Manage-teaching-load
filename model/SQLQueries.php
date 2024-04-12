@@ -40,15 +40,23 @@ class SQLQueries
     public function updateData($table, $data, $condition)
     {
         $setClause = "";
+        $values = [];
         foreach ($data as $key => $value) {
             $setClause .= "$key = ?, ";
+            $values[] = $value;
         }
         $setClause = rtrim($setClause, ", ");
         $sql = "UPDATE $table SET $setClause WHERE $condition";
         $stmt = $this->conn->prepare($sql);
-        $stmt->execute(array_values($data));
-        return $stmt->rowCount();
+
+        if (count($values) === substr_count($sql, '?')) {
+            $stmt->execute($values);
+            return $stmt->rowCount();
+        } else {
+            return "Số lượng giá trị không khớp với số lượng tham số trong truy vấn SQL";
+        }
     }
+
 
     public function deleteData($table, $condition)
     {
