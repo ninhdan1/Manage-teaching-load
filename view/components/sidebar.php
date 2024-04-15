@@ -47,7 +47,7 @@
                 <h6 class="collapse-header">Quản lý giảng dạy</h6>
                 <a class="collapse-item" href="/view/import-excel.php">Import file excel</a>
                 <a class="collapse-item" href="/controller/giangdaycontroller.php?action=index">Danh sách giảng dạy</a>
-                <a class="collapse-item" href="#">Quản lý môn học</a>
+                <a class="collapse-item" href="/controller/monhoccontroller.php?action=index">Quản lý môn học</a>
             </div>
         </div>
 

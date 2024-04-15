@@ -29,15 +29,31 @@ class SQLQueries
 
     public function insertData($table, $data)
     {
-        $columns = implode(", ", array_keys($data));
-        $placeholders = rtrim(str_repeat("?, ", count($data)), ", ");
-        $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute(array_values($data));
-        return $this->conn->lastInsertId();
+        try {
+            // Construct the SQL query
+            $columns = implode(", ", array_keys($data));
+            $placeholders = ':' . implode(', :', array_keys($data));
+            $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+
+            // Prepare the statement
+            $stmt = $this->conn->prepare($sql);
+
+            // Bind parameters and execute the statement
+            foreach ($data as $key => $value) {
+                $stmt->bindValue(':' . $key, $value);
+            }
+            $stmt->execute();
+
+            // Return the last insert ID
+            return $this->conn->lastInsertId();
+        } catch (PDOException $e) {
+            // Handle any exceptions (e.g., log the error)
+            error_log('Error inserting data: ' . $e->getMessage());
+            return false; // Return false to indicate failure
+        }
     }
 
-    public function updateData($table, $data, $condition)
+    public function updateData($table, $data, $condition, $params = [])
     {
         $setClause = "";
         $values = [];
@@ -48,7 +64,7 @@ class SQLQueries
         $setClause = rtrim($setClause, ", ");
         $sql = "UPDATE $table SET $setClause WHERE $condition";
         $stmt = $this->conn->prepare($sql);
-
+        $values = array_merge($values, $params);
         if (count($values) === substr_count($sql, '?')) {
             $stmt->execute($values);
             return $stmt->rowCount();
@@ -56,6 +72,8 @@ class SQLQueries
             return "Số lượng giá trị không khớp với số lượng tham số trong truy vấn SQL";
         }
     }
+
+
 
 
     public function deleteData($table, $condition)

@@ -22,7 +22,7 @@ $content = '
 </div>
 
 
-
+<!-- Modal Update giảng dạy -->
 <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -49,12 +49,12 @@ $content = '
             <input type="text" class="form-control" id="tiet_batdau" readonly>
         </div>
         <div class="mb-3">
-        <label for="ma_gv" class="col-form-label">Mã giảng viên:</label>
+        <label for="ma_gv" class="col-form-label">Giảng viên:</label>
         <input type="text" class="form-control" id="ma_gv" readonly>
       </div>
 
         <div class="mb-3">
-        <label for="ma_monhoc" class="col-form-label">Mã môn học:</label>
+        <label for="ma_monhoc" class="col-form-label">Môn học:</label>
         <input type="text" class="form-control" id="ma_monhoc" readonly>
       </div>
         <div class="mb-3">
@@ -77,7 +77,7 @@ $content = '
           <div class="col-md-6">
           <div class="mb-3 has-validation">
           <label for="si_solop" class="col-form-label">Sĩ số lớp:</label>
-          <input type="number" class="form-control" id="si_solop" pattern="[0-9]+" title="Vui lòng nhập số nguyên dương">
+          <input type="number" class="form-control" id="si_solop" required pattern="[0-9]+" title="Vui lòng nhập số nguyên dương">
           <div class="invalid-feedback">
           Sĩ số lớp không được để trống và phải là số nguyên dương!
       </div>
@@ -121,7 +121,7 @@ $content = '
 </div>
 
 
-
+<!-- Table giảng dạy -->
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -180,65 +180,63 @@ $content .= '
 
 
 <script src="/js/modal/modal-detail-giangday.js"></script>
-
 <script>
+
 $(document).ready(function() {
-    $(".editButton").click(function() {
-        // Hiển thị modal cập nhật
-        $("#EditModal").modal("show");
-    });
+  
+    
+  $("#updateForm").submit(function(e) {
+      e.preventDefault(); 
+      var maLopMonHoc = $("#ma_lopmonhoc").val();
+      var siSo = $("#si_solop").val();
 
-    $("#updateForm").submit(function(e) {
-        e.preventDefault(); 
-        var maLopMonHoc = $("#ma_lopmonhoc").val();
-        var siSo = $("#si_solop").val();
+      // Ẩn modal cập nhật
+      $("#EditModal").modal("hide");
 
-        // Ẩn modal cập nhật
-        $("#EditModal").modal("hide");
+      // Hiển thị modal xác nhận
+      $("#confirmModal").modal("show");
 
-        // Hiển thị modal xác nhận
-        $("#confirmModal").modal("show");
+      // Xử lý sự kiện khi nút xác nhận trong modal xác nhận được click
+      $("#confirmUpdateBtn").click(function() {
+          // Gửi AJAX request
+          $.ajax({
+              url: "../controller/GiangDayController.php?action=updateSiSo",
+              type: "POST",
+              data: { ma_lopmonhoc: maLopMonHoc, si_solop: siSo },
+              success: function(response) {
+                  // Ẩn modal xác nhận
+                  $("#confirmModal").modal("hide");
+                  $("#EditModal").modal("hide");
 
-        // Xử lý sự kiện khi nút xác nhận trong modal xác nhận được click
-        $("#confirmUpdateBtn").click(function() {
-            // Gửi AJAX request
-            $.ajax({
-                url: "../controller/GiangDayController.php?action=updateSiSo",
-                type: "POST",
-                data: { ma_lopmonhoc: maLopMonHoc, si_solop: siSo },
-                success: function(response) {
-                    // Ẩn modal xác nhận
-                    $("#confirmModal").modal("hide");
-                    $("#EditModal").modal("hide");
-
-                    // Hiển thị thông báo thành công
-                    toastr.success(\'Cập nhật dữ liệu thành công!\', { timeOut: 1000 });
+                  // Hiển thị thông báo thành công
+                  toastr.success(\'Cập nhật dữ liệu thành công!\', { timeOut: 1000 });
 
 
-                    // Load lại dữ liệu trên trang
-                    setTimeout(function() {
-                      // Làm mới trang để cập nhật dữ liệu mới
-                      location.reload();
-                    }, 300);
-                    
+                  // Load lại dữ liệu trên trang
+                  setTimeout(function() {
+                    // Làm mới trang để cập nhật dữ liệu mới
+                    location.reload();
+                  }, 300);
+                  
 
-                },
-                error: function(xhr, status, error) {
-                    // Xử lý lỗi nếu cần
-                    console.error(error);
-                }
-            });
-        });
-    });
-
-    $("#confirmModal").on("hidden.bs.modal", function() {
-      $("#EditModal").modal("show");
+              },
+              error: function(xhr, status, error) {
+                  // Xử lý lỗi nếu cần
+                  console.error(error);
+              }
+          });
+      });
   });
+
+  $("#confirmModal").on("hidden.bs.modal", function() {
+    $("#EditModal").modal("show");
 });
+});
+
+
+
 </script>
 
 ';
 
-
-// Include file layout-admin.php
 include '../view/admin/layout-admin.php';

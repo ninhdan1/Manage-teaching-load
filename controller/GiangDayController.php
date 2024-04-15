@@ -19,6 +19,7 @@ class GiangDayController
     {
         $data = $this->model->getDSGD_Model();
 
+
         require_once '../view/giang_day_list.php';
     }
 
