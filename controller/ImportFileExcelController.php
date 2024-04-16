@@ -5,6 +5,7 @@ require_once __DIR__ . '/../model/SQLQueries.php';
 require_once __DIR__ . '/../DB/DBConnect.php';
 
 
+
 class ImportFileExcelController
 {
     private $model;
@@ -26,6 +27,7 @@ class ImportFileExcelController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($_FILES["fileToUpload"]["error"] != 0) {
+
                 echo "Lỗi: Có lỗi xảy ra khi tải tệp lên máy chủ!";
                 exit();
             }

@@ -181,7 +181,6 @@ $content .= '
 
 <script src="/js/modal/modal-detail-giangday.js"></script>
 <script>
-
 $(document).ready(function() {
   
     

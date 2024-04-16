@@ -46,7 +46,6 @@ if (!isset($_SESSION['login'])) {
         <link ref="stylesheet" href="https://cdn.datatables.net/responsive/3.0.1/css/responsive.dataTables.css">
 
 
-
     </head>
 
     <body id="page-top">
@@ -135,20 +134,17 @@ if (!isset($_SESSION['login'])) {
         <!-- Page level custom scripts -->
         <script src="/js/demo/chart-area-demo.js"></script>
         <script src="/js/demo/chart-pie-demo.js"></script>
-
         <!-- Toastr JS -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 
+
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <!-- DataTables JS -->
         <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/3.0.1/js/dataTables.responsive.js"></script>
         <script src="https://cdn.datatables.net/responsive/3.0.1/js/responsive.dataTables.js"></script>
 
-        <!-- DataTables -->
         <script src="/js/datatables/datatables-giangday.js"></script>
         <script src="/js/datatables/datatables-monhoc.js"></script>
-
-
 
 
 
