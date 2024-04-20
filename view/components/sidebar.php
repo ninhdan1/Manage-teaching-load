@@ -45,7 +45,7 @@
         <div id="collapseImportExcel" class="collapse" aria-labelledby="headingImportExcel" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Quản lý giảng dạy</h6>
-                <a class="collapse-item" href="/view/import-excel.php">Import file excel</a>
+                <a class="collapse-item" href="/view/import-excel.php">Import file</a>
                 <a class="collapse-item" href="/controller/giangdaycontroller.php?action=index">Danh sách giảng dạy</a>
                 <a class="collapse-item" href="/controller/monhoccontroller.php?action=index">Quản lý môn học</a>
             </div>
@@ -53,6 +53,43 @@
 
     </li>
 
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <!-- <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThongKe"
+            aria-expanded="true" aria-controls="collapseThongKe">
+            <i class="bi bi-upload"></i>
+            <span>Thống kê</span>
+        </a>
+        <div id="collapseThongKe" class="collapse" aria-labelledby="headingThongKe" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Thông kê và so sánh/h6>
+                    <a class="collapse-item"
+                        href="/controller/ThongKeController.php?action=getListGiangDayByHocKy">Thống kê khối lượng giảng
+                        dạy</a>
+                    <a class="collapse-item" href="/controller/giangdaycontroller.php?action=index">Danh sách giảng
+                        dạy</a>
+                    <a class="collapse-item" href="/controller/monhoccontroller.php?action=index">Quản lý môn học</a>
+            </div>
+        </div>
+
+    </li> -->
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThongKe" aria-expanded="true" aria-controls="collapseThongKe">
+            <i class="bi bi-person-circle"></i>
+            <span>Khối lượng giảng dạy</span>
+        </a>
+        <div id="collapseThongKe" class="collapse" aria-labelledby="headingThongKe" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Thống kê và so sánh</h6>
+                <a class="collapse-item" href="/view/thong-ke-khoi-luong.php">Thống kê khối
+                    lượng</a>
+                <a class="collapse-item" href="ds_gv.php">So sánh khối lương</a>
+            </div>
+        </div>
+    </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">

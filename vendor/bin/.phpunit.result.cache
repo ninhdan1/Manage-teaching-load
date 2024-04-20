@@ -1,0 +1,1 @@
+{"version":1,"defects":{"MonHocTest::testInsert":3,"MonHocTest::testInsertWithEmptyMaMonHoc":3,"MonHocTest::testInsertWithEmptyTenMonHoc":3},"times":{"MonHocTest::testInsert":0.016,"MonHocTest::testInsertWithEmptyMaMonHoc":0.005,"MonHocTest::testInsertWithEmptyTenMonHoc":0.016}}

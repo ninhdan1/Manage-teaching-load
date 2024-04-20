@@ -112,8 +112,8 @@ $content = '
         </form> 
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Đóng</button>
-    <button type="submit" class="btn btn-warning"  form="updateForm">Cập nhật</button>
+    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><strong>Đóng</strong></button>
+    <button type="submit" class="btn btn-warning"  form="updateForm"> <strong>Xác nhận</strong></button>
     <!-- Thêm các nút chức năng khác nếu cần -->
 </div>
 </div>
@@ -123,11 +123,18 @@ $content = '
 
 <!-- Table giảng dạy -->
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary"> Danh sách giảng dạy</h6>
-    </div>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Giảng dạy</h1>
+    
+</div>
+<div class="col">
+<span class="badge rounded-pill text-bg-danger mb-3"> <a href="" class="text-decoration-none text-light"> Trang chủ </a></span>
+<span class="badge rounded-pill text-bg-light mb-3"> <strong> <i class="bi bi-caret-right-fill"></i> </strong> </span>
+<span class="badge rounded-pill text-bg-info mb-3">  Danh sách giảng dạy </span>
+</div>
 
+
+<div class="card  mb-4">
     <div class="card-body">
         <div class="table-responsive">
 
@@ -160,7 +167,7 @@ if (isset($data)) {
                         <td class="text-center">' . $item['ho_lot_gv'] . ' ' . $item['ten_gv'] . '</td>
                         <td class="text-center">' . $item['ngay_batdau'] . '</td>
                         <td class="text-center">' . $item['tiet_hoc'] . '</td>
-                        <td class="text-center">' . $item['ten_hocky'] . ' - ' . $item['nam_hoc'] . '</td>
+                        <td class="text-center">' . 'HK' . $item['ten_hocky'] . ' ' . $item['nam_hoc'] . ' - ' . ($item['nam_hoc'] + 1) . '</td>
                     </tr>';
   }
 } else {

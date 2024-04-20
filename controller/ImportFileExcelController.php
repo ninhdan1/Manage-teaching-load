@@ -1,5 +1,7 @@
 <?php
 
+use SebastianBergmann\Environment\Console;
+
 require_once __DIR__ . '/../model/ImportFileExcel.php';
 require_once __DIR__ . '/../model/SQLQueries.php';
 require_once __DIR__ . '/../DB/DBConnect.php';
@@ -66,11 +68,6 @@ class ImportFileExcelController
             ];
             $ma_hk = $this->insertHocKyAndGetMaHK($hoc_ky_data);
 
-            if (!$ma_hk) {
-                echo ("Lỗi: Học kì và năm học này đã được import trước đó!.");
-                exit();
-            }
-
             foreach (array_chunk($data, 100) as $chunk) {
                 foreach ($chunk as $row) {
                     if (!$this->insertMonHocIfNotExists($row)) exit();
@@ -79,7 +76,7 @@ class ImportFileExcelController
 
                     if (!$this->insertLopIfNotExists($row)) exit();
 
-                    if (!$this->insertLopMonHocIfNotExists($row, $ma_hk)) exit();
+                    if (!$this->updateOrInsertLopMonHoc($row, $ma_hk)) exit();
                 }
             }
 
@@ -93,6 +90,88 @@ class ImportFileExcelController
         }
     }
 
+    private function insertHocKyAndGetMaHK($hoc_ky_data)
+    {
+        $result = $this->sqlQueries->selectData('hoc_ky', 'ma_hocky', 'ten_hocky = ? AND nam_hoc = ?', [$hoc_ky_data['ten_hocky'], $hoc_ky_data['nam_hoc']]);
+
+        // Nếu học kỳ đã tồn tại, trả về mã học kỳ
+        if (!empty($result)) {
+            return $result[0]['ma_hocky'];
+        }
+
+        // Nếu không, thực hiện chèn mới và trả về mã học kỳ mới
+        return $this->sqlQueries->insertData('hoc_ky', $hoc_ky_data);
+    }
+
+
+    private function updateOrInsertLopMonHoc($row, $ma_hk)
+    {
+        if (isset($row[0]) && !empty($row[0])) {
+            if (empty($row[1]) || empty($row[2]) || empty($row[3]) || empty($row[85]) || empty($row[81]) || empty($row[86]) || empty($row[6]) || empty($row[83]) || empty($row[76]) || empty($row[89]) || empty($row[4]) || empty($row[5]) || empty($row[82])) {
+                echo "Lỗi: Dữ liệu lớp môn học không đầy đủ.";
+                return false;
+            }
+
+            if (!is_numeric($row[0])) {
+                echo "Lỗi: 'Mã lớp môn học' phải là một chuỗi số nguyên.";
+                return false;
+            }
+
+            // Kiểm tra xem mã lớp môn học đã tồn tại hay không
+            $result = $this->sqlQueries->selectData('lop_monhoc', '*', 'ma_lopmonhoc = ? AND ma_hk = ?', [$row[0], $ma_hk]);
+
+            if ($result) {
+                $data = [
+                    'thu' => $row[1],
+                    'tiet_batdau' => $row[2],
+                    'so_tiet' => $row[3],
+                    'so_tietmonhoc' => $row[85],
+                    'si_solop' => $row[81],
+                    'ma_lophoc' => $row[86],
+                    'ten_phong' => $row[6],
+                    'tiet_hoc' => $row[83],
+                    'thoigian_hoc' => $row[76],
+                    'ngay_batdau' => $row[89],
+                    'ma_monhoc' => $row[4],
+                    'ma_gv' => $row[5],
+                    'ma_hk' => $ma_hk,
+                    'ma_lop' => $row[82]
+                ];
+
+                // Thực hiện UPDATE dữ liệu
+                $this->sqlQueries->updateData('lop_monhoc', $data, 'ma_lopmonhoc = ? AND ma_hk = ?', [$row[0], $ma_hk]);
+            } else {
+                // Nếu chưa tồn tại, thực hiện INSERT
+                $data = [
+                    'ma_lopmonhoc' => $row[0],
+                    'thu' => $row[1],
+                    'tiet_batdau' => $row[2],
+                    'so_tiet' => $row[3],
+                    'so_tietmonhoc' => $row[85],
+                    'si_solop' => $row[81],
+                    'ma_lophoc' => $row[86],
+                    'ten_phong' => $row[6],
+                    'tiet_hoc' => $row[83],
+                    'thoigian_hoc' => $row[76],
+                    'ngay_batdau' => $row[89],
+                    'ma_monhoc' => $row[4],
+                    'ma_gv' => $row[5],
+                    'ma_hk' => $ma_hk,
+                    'ma_lop' => $row[82]
+                ];
+
+                $this->sqlQueries->insertData('lop_monhoc', $data);
+
+                print($data);
+            }
+            return true;
+        } else {
+            echo "Lỗi: 'Mã lớp môn học' không được gửi hoặc bị thiếu.";
+            return false;
+        }
+    }
+
+
     private function insertMonHocIfNotExists($row)
     {
 
@@ -103,7 +182,6 @@ class ImportFileExcelController
                 return false;
             }
 
-            // Kiểm tra kiểu dữ liệu sai
             if (!is_string($row[4])) {
                 echo "Lỗi: 'Mã môn học' phải là một chuỗi.";
                 return false;
@@ -127,20 +205,6 @@ class ImportFileExcelController
         }
     }
 
-
-    private function insertHocKyAndGetMaHK($hoc_ky_data)
-    {
-        $result = $this->sqlQueries->selectData('hoc_ky', 'COUNT(*)', 'ten_hocky IN (?, ?) AND nam_hoc = ?', [$hoc_ky_data['ten_hocky'], $hoc_ky_data['ten_hocky'] == 1 ? 2 : 1, $hoc_ky_data['nam_hoc']]);
-        $count = $result[0]['COUNT(*)'];
-
-        if ($count > 0) {
-            return false;
-        }
-
-        $ma_hk = $this->sqlQueries->insertData('hoc_ky', $hoc_ky_data);
-
-        return $ma_hk;
-    }
 
     private function insertGiangVienIfNotExists($row)
     {
@@ -202,52 +266,6 @@ class ImportFileExcelController
             }
         } else {
             echo "Lỗi: 'Mã lớp' không được gửi hoặc bị thiếu.";
-            return false;
-        }
-    }
-
-    private function insertLopMonHocIfNotExists($row, $ma_hk)
-    {
-        if (isset($row[0]) && !empty($row[0])) {
-            if (empty($row[1]) || empty($row[2]) || empty($row[3]) || empty($row[85]) || empty($row[81]) || empty($row[86]) || empty($row[6]) || empty($row[83]) || empty($row[76]) || empty($row[89]) || empty($row[4]) || empty($row[5]) || empty($row[82])) {
-                echo "Lỗi: Dữ liệu lớp môn học không đầy đủ.";
-                return false;
-            }
-
-            if (!is_numeric($row[0])) {
-                echo "Lỗi: 'Mã lớp môn học' phải là một chuỗi.";
-                return false;
-            }
-
-            $result = $this->sqlQueries->selectData('lop_monhoc', '*', 'ma_lopmonhoc = ?', [$row[0]]);
-            if (!$result) {
-                $data = [
-                    'ma_lopmonhoc' => $row[0],
-                    'thu' => $row[1],
-                    'tiet_batdau' => $row[2],
-                    'so_tiet' => $row[3],
-                    'so_tietmonhoc' => $row[85],
-                    'si_solop' => $row[81], //
-                    'ma_lophoc' => $row[86],
-                    'ten_phong' => $row[6],
-                    'tiet_hoc' => $row[83],
-                    'thoigian_hoc' => $row[76],
-                    'ngay_batdau' => $row[89],
-                    'ma_monhoc' => $row[4],
-                    'ma_gv' => $row[5],
-                    'ma_hk' => $ma_hk,
-                    'ma_lop' => $row[82],
-
-                ];
-
-                $this->sqlQueries->insertData('lop_monhoc', $data);
-                return true;
-            } else {
-
-                return true;
-            }
-        } else {
-            echo "Lỗi: 'Mã lớp môn học' không được gửi hoặc bị thiếu.";
             return false;
         }
     }
