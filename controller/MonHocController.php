@@ -1,8 +1,11 @@
 <?php
 
-require_once '../model/MonHoc.php';
-require_once  '../DB/DBConnect.php';
-require '../Helper/ResponseHelper.php';
+require_once __DIR__ . '/../helper/ConfigHelper.php';
+
+require_once MODEL_PATH . 'MonHoc.php';
+require_once DB_PATH . 'DBConnect.php';
+require_once HELPER_PATH . 'ResponseHelper.php';
+
 
 class MonHocController
 {

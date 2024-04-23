@@ -1,7 +1,10 @@
 <?php
 
-require_once  '../model/GiangDay.php';
-require_once  '../DB/DBConnect.php';
+require_once __DIR__ . '/../helper/ConfigHelper.php';
+
+require_once MODEL_PATH . 'GiangDay.php';
+require_once DB_PATH . 'DBConnect.php';
+
 
 class GiangDayController
 {

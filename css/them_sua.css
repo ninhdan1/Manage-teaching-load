@@ -1,0 +1,55 @@
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container-fluid {
+  max-width: 550px;
+  margin: auto;
+}
+
+.pass-text {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#password-form {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#password-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#password-form input[type="text"],
+#password-form input[type="password"],
+#password-form select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#password-form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+#password-form button:hover {
+  background-color: #0056b3;
+}
+.error-p {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}

@@ -1,6 +1,8 @@
 <?php
 
-require_once '../model/SQLQueries.php';
+require_once __DIR__ . '/../Helper/ConfigHelper.php';
+
+require_once MODEL_PATH . 'SQLQueries.php';
 
 
 class ThongKe

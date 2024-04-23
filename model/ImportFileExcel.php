@@ -1,6 +1,8 @@
 <?php
 
-require_once  __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../Helper/ConfigHelper.php';
+
+require_once VENDOR_PATH . 'autoload.php';
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 

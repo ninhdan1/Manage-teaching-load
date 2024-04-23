@@ -27,23 +27,28 @@ if (!isset($_SESSION['login'])) {
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <!-- Custom fonts for this template-->
         <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
 
         <!-- Custom styles for this template-->
         <link href="/css/sb-admin-2.min.css" rel="stylesheet">
-        <link href="/css/custom-button.css" rel="stylesheet">
 
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
         <!-- Css Toastr -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
         <!-- Css DataTables -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.min.css">
         <link ref="stylesheet" href="https://cdn.datatables.net/responsive/3.0.1/css/responsive.dataTables.css">
         <link ref="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css">
         <link ref="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.css">
-
 
 
 
@@ -65,13 +70,16 @@ if (!isset($_SESSION['login'])) {
                 <div id="content">
 
                     <!-- Topbar -->
-                    <?php require __DIR__ . '/../components/navbar.php' ?>
+
+                    <?php require_once __DIR__ . '/../../Helper/ConfigHelper.php';
+                    require VIEW_PATH . 'components/navbar.php' ?>
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
-                        <?php echo isset($content) ? $content : (require __DIR__ . '/../components/content-admin.php'); ?>
+                        <?php require_once __DIR__ . '/../../Helper/ConfigHelper.php';
+                        echo isset($content) ? $content : (require VIEW_PATH . 'components/content-admin.php'); ?>
 
                     </div>
                     <!-- /.container-fluid -->
@@ -79,7 +87,8 @@ if (!isset($_SESSION['login'])) {
                 </div>
                 <!-- End of Main Content -->
 
-                <?php require __DIR__ . '/../components/footer.php' ?>
+                <?php require_once __DIR__ . '/../../Helper/ConfigHelper.php';
+                require VIEW_PATH . 'components/footer.php' ?>
 
             </div>
 
@@ -87,35 +96,21 @@ if (!isset($_SESSION['login'])) {
         <!-- End of Page Wrapper -->
 
         <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+        <?php require_once __DIR__ . '/../../Helper/ConfigHelper.php';
+        require VIEW_PATH . 'components/button-page-to-top.php' ?>
+
 
         <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="../../logout.php">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php require_once __DIR__ . '/../../Helper/ConfigHelper.php';
+        require VIEW_PATH . 'components/modal-logout.php' ?>
 
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
         </script>
 
         <!-- Core plugin JavaScript-->
@@ -136,6 +131,7 @@ if (!isset($_SESSION['login'])) {
         <!-- Toastr JS -->
 
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
         <!-- DataTables JS -->
         <script src="https://cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/responsive/3.0.1/js/dataTables.responsive.js"></script>
@@ -152,9 +148,15 @@ if (!isset($_SESSION['login'])) {
         <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
 
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+
+
         <script src="/js/datatables/datatables-giangday.js"></script>
         <script src="/js/datatables/datatables-monhoc.js"></script>
         <script src="/js/datatables/datatables-thongke.js"></script>
+        <script src="/js/datatables/datatables-giangvien.js"></script>
+        <script src="/js/datatables/datatable-taikhoan.js"></script>
     </body>
 
 </php>

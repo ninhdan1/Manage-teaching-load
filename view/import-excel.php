@@ -131,4 +131,5 @@ function validateYearInput() {
 
 
 
-include '../view/admin/layout-admin.php';
+require_once __DIR__ . '/../Helper/ConfigHelper.php';
+include VIEW_PATH . 'admin/layout-admin.php';

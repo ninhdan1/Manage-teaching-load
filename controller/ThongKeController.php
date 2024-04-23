@@ -1,9 +1,11 @@
 <?php
 
+require_once __DIR__ . '/../Helper/ConfigHelper.php';
 
-require_once '../model/ThongKe.php';
-require_once  '../DB/DBConnect.php';
-require '../Helper/ResponseHelper.php';
+require_once MODEL_PATH . 'ThongKe.php';
+require_once DB_PATH . 'DBConnect.php';
+require_once  HELPER_PATH . 'ResponseHelper.php';
+
 
 
 class ThongKeController

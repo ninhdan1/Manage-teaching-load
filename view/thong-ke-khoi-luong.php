@@ -21,7 +21,7 @@ $content = '
     <div class="form-group row ">
     <label for="maHocKy" class="col-sm-1 col-form-label"><strong>Học kỳ</strong></label>
     <div class="col-sm-3">
-        <select class="form-control" id="maHocKy" name="maHocKy">';
+        <select class="form-control"  id="maHocKy" name="maHocKy">';
 
 $content .= '
 </select>
@@ -42,9 +42,9 @@ $content .= '
         <thead class="">
         <tr>
             <th rowspan="3"  class="text-center align-middle "  style="font-size: 12px;">STT</th>
-            <th rowspan="3"  class="text-center align-middle" style="font-size: 12px;">CÁC MÔN THÍ NGHIỆM - THỰC HÀNH</th>
+            <th rowspan="3"  class="text-center align-middle" style="font-size: 12px;">CÁC MÔN THÍ NGHIỆM THỰC HÀNH</th>
             <th colspan="5" rowspan="2"  class="text-center align-middle"  style="font-size: 12px;">SỐ SINH VIÊN HỌC THÍ NGHIỆM - THỰC HÀNH</th>
-            <th rowspan="3"  class="text-center align-middle "  style="font-size: 12px;">SỐ CA THỰC HÀNH </th>
+            <th rowspan="3"  class="text-center align-middle "  style="font-size: 12px;">SỐ CA <br> THỰC <br> HÀNH </th>
             <th colspan="7"  class="text-center align-middle"  style="font-size: 12px;">GIÁO VIÊN HƯỚNG DẪN</th>
         </tr>
         <tr>
@@ -52,11 +52,11 @@ $content .= '
             <th colspan="4"  class="text-center align-middle"  style="font-size: 12px;">GIÁO VIÊN THỨ HAI (TG/CH)</th>
         </tr>
         <tr>
-            <th  class="text-center align-middle"  style="font-size: 12px;">NGÀNH LỚP</th>
+            <th  class="text-center align-middle"  style="font-size: 12px;">NGÀNH <br> LỚP</th>
             <th  class="text-center align-middle"  style="font-size: 12px;">SL</th>
-            <th  class="text-center align-middle"  style="font-size: 12px;">Số CA 1 SV</th>
-            <th  class="text-center align-middle"  style="font-size: 12px;">Số SV 1 CA</th>
-            <th  class="text-center align-middle"  style="font-size: 12px;">Số CA NHÓM</th>
+            <th  class="text-center align-middle"  style="font-size: 12px;">SỐ CA <br> 1 SV</th>
+            <th  class="text-center align-middle"  style="font-size: 12px;">SỐ SV <br> 1 CA</th>
+            <th  class="text-center align-middle"  style="font-size: 12px;">SỐ <br> NHÓM</th>
             
             <th colspan="2"  class="text-center align-middle"  style="font-size: 12px;">Họ Tên</th>
             <th  class="text-center align-middle"  style="font-size: 12px;">Số Tiết</th>
@@ -97,7 +97,7 @@ $content .= '
                 <th  class="text-center align-middle"  style="font-size: 12px;">SỐ LƯỢNG</th>
                 <th  class="text-center align-middle"  style="font-size: 12px;">Số CA 1 SV</th>
                 <th  class="text-center align-middle"  style="font-size: 12px;">Số SV 1 CA</th>
-                <th  class="text-center align-middle"  style="font-size: 12px;">Số CA NHÓM</th>
+                <th  class="text-center align-middle"  style="font-size: 12px;">Số <br> NHÓM</th>
                 
                 <th colspan="2"  class="text-center align-middle"  style="font-size: 12px;">Họ Tên</th>
                 <th  class="text-center align-middle"  style="font-size: 12px;">Số Tiết</th>
@@ -164,10 +164,11 @@ $content .= '
 $content .= '
 <script>
 $(document).ready(function() {
-
+    
     loadHocKyList();
 
     function loadHocKyList() {
+       
         $.ajax({
             url: "../controller/thongkecontroller.php?action=getListHocKy",
             type: "GET",
@@ -185,8 +186,10 @@ $(document).ready(function() {
                             }
 
                         html += \'<option value="\' + item.ma_hocky + \'">Học kỳ: \' + hocKyRoman  + \' Năm học: \' + item.nam_hoc + \'-\' + (parseInt(item.nam_hoc) + 1) + \'</option>\';
+                       
                     });
-                    $("#maHocKy").html(html);
+
+                    $("#maHocKy").html(html); // Đặt HTML mới cho select box
                 }
             },
             error: function(xhr, status, error) {
@@ -201,4 +204,5 @@ $(document).ready(function() {
 
 ';
 
-include '../view/admin/layout-admin.php';
+require_once __DIR__ . '/../Helper/ConfigHelper.php';
+include VIEW_PATH . 'admin/layout-admin.php';

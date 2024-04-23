@@ -304,11 +304,11 @@ $(document).ready(function () {
         infoEmpty: "Dữ liệu rỗng",
         emptyTable: "Không có dữ liệu nào",
         processing: "Đang xử lý...",
-        search: "Tìm kiếm:",
+        search: "<strong>Tìm kiếm</strong>",
         loadingRecords: "Đang tải...",
         zeroRecords: "Không tìm thấy dữ liệu",
         infoFiltered: "(được lọc từ tổng số _MAX_ dòng dữ liệu)",
-        sSearchPlaceholder: "Nhập từ khóa tìm kiếm...",
+        sSearchPlaceholder: "Nhập từ khóa...",
       },
 
       layout: {

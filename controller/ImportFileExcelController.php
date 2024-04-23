@@ -1,12 +1,10 @@
 <?php
 
-use SebastianBergmann\Environment\Console;
+require_once __DIR__ . '/../helper/ConfigHelper.php';
 
-require_once __DIR__ . '/../model/ImportFileExcel.php';
-require_once __DIR__ . '/../model/SQLQueries.php';
-require_once __DIR__ . '/../DB/DBConnect.php';
-
-
+require_once MODEL_PATH . 'ImportFileExcel.php';
+require_once MODEL_PATH . 'SQLQueries.php';
+require_once DB_PATH . 'DBConnect.php';
 
 class ImportFileExcelController
 {
@@ -16,8 +14,8 @@ class ImportFileExcelController
 
     public function __construct()
     {
-        $this->conn = (new DBConnect())->getConnection(); // Tạo kết nối mới
-        $this->model = new ImportFileExcel($this->conn); // Truyền kết nối vào ImportFileExcel
+        $this->conn = (new DBConnect())->getConnection();
+        $this->model = new ImportFileExcel($this->conn);
         $this->sqlQueries = new SQLQueries($this->conn);
     }
 
