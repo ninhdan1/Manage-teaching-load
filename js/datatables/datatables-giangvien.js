@@ -108,6 +108,12 @@ $(document).ready(function () {
 
           // Đổ dữ liệu vào các select boxes
           $("#ma_hocky1, #ma_hocky2").html(optionsHtml);
+
+          // Kích hoạt plugin select2 cho các select boxes
+          $("#ma_hocky1, #ma_hocky2").select2({
+            theme: "bootstrap-5",
+            dropdownParent: $("#SoSanhHocKyModal"),
+          });
         } else {
           console.log(data.message);
         }
@@ -134,11 +140,6 @@ $(document).ready(function () {
     }
   });
 
-  // $("#SoSanhHocKyModal").on("show.bs.modal", function (e) {
-  //   // Xóa dữ liệu trong các trường hợp hoặc khởi tạo dữ liệu mới ở đây
-  //   clearAllData(); // Đảm bảo clear hết dữ liệu trước khi hiển thị modal
-  // });
-
   $("#ma_hocky1, #ma_hocky2").change(function () {
     var selectedHocKy1 = $("#ma_hocky1").val();
     var selectedHocKy2 = $("#ma_hocky2").val();
@@ -159,15 +160,26 @@ $(document).ready(function () {
       $("#tongKetResult").text("");
     }
 
-    // Hide selected semesters from each other
-    $("#ma_hocky1 option").each(function () {
-      var isHidden = $(this).val() == selectedHocKy2;
-      $(this).prop("hidden", isHidden);
+    $("#ma_hocky1").on("select2:select", function (e) {
+      var selectedValue = e.params.data.id;
+      $("#ma_hocky2 option").each(function () {
+        if ($(this).val() == selectedValue) {
+          $(this).prop("disabled", true);
+        } else {
+          $(this).prop("disabled", false);
+        }
+      });
     });
 
-    $("#ma_hocky2 option").each(function () {
-      var isHidden = $(this).val() == selectedHocKy1;
-      $(this).prop("hidden", isHidden);
+    $("#ma_hocky2").on("select2:select", function (e) {
+      var selectedValue = e.params.data.id;
+      $("#ma_hocky1 option").each(function () {
+        if ($(this).val() == selectedValue) {
+          $(this).prop("disabled", true);
+        } else {
+          $(this).prop("disabled", false);
+        }
+      });
     });
 
     if (!selectedHocKy1 || !selectedHocKy2) {
@@ -342,7 +354,9 @@ $(document).ready(function () {
 
   function loadGiangVienSelectBoxes() {
     $.ajax({
-      url: "../controller/giangviencontroller.php?action=index",
+      url:
+        "../controller/sosanhcontroller.php?action=getListGiangVienNoExist&ma_gv=" +
+        selectedMaGV,
       type: "GET",
       success: function (response) {
         var data = JSON.parse(response);
@@ -362,6 +376,10 @@ $(document).ready(function () {
           });
 
           $("#ma_giangvien").html(optionsHtml);
+          $("#ma_giangvien").select2({
+            theme: "bootstrap-5",
+            dropdownParent: $("#SoSanhGiangVienModal"),
+          });
         } else {
           toastr.error(data.message);
         }
@@ -424,6 +442,10 @@ $(document).ready(function () {
           });
 
           $("#ma_hockygiangvien").html(optionsHtml);
+          $("#ma_hockygiangvien").select2({
+            theme: "bootstrap-5",
+            dropdownParent: $("#SoSanhGiangVienModal"),
+          });
         } else {
           toastr.error(data.message);
         }

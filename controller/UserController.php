@@ -1,15 +1,29 @@
 <?php
 require_once "../DB/DBConnect.php";
 require_once "../model/User.php";
+require_once "../model/ThongKe.php";
+require_once "../model/SoSanh.php";
+require_once "../model/Message.php";
+
+require_once __DIR__ . '/../Helper/ConfigHelper.php';
+require_once  HELPER_PATH . 'ResponseHelper.php';
 session_start();
 class UserController
 {
   private $model;
+  private $ThongKe;
+  private $SoSanh;
   private $conn;
+  private $responseHelper;
+  private $message;
   public function __construct()
   {
     $this->conn = (new DBConnect())->getConnection();
     $this->model = new User($this->conn);
+    $this->ThongKe = new ThongKe($this->conn);
+    $this->SoSanh = new SoSanh($this->conn);
+    $this->message = new Message($this->conn);
+    $this->responseHelper = new ResponseHelper();
   }
   public function login()
   {
@@ -71,14 +85,19 @@ class UserController
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['role'];
         $_SESSION['login'] = true;
-        header("Location: ../view/admin/list_taikhoan.php");
+        header("Location: ../view/admin/layout-admin.php");
         exit();
-      } elseif ($user['role'] == 'user') {
+      } elseif ($user['role'] == 'user' && $user['ma_gv'] !== null) {
         $_SESSION['id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['role'];
+        $_SESSION['ma_gv'] = $user['ma_gv'];
         $_SESSION['login'] = true;
-        header("Location: ../view/user/layout-user.php");
+        header("Location: ../view/thong-ke-canhan.php");
+        exit();
+      } else {
+        $_SESSION['thongbao'] = 'Tài khoản hoặc mật khẩu không đúng';
+        header("Location: ../view/login.php");
         exit();
       }
     } else {
@@ -326,6 +345,95 @@ class UserController
     $str = preg_replace('/\s+/', '', trim($str));
     return $str;
   }
+
+  public function getAccountbyMagv()
+  {
+    $ma_gv = $_SESSION['ma_gv'] ?? null;
+    $data = $this->model->getAccountByMagv($ma_gv);
+    return $this->responseHelper->Response(true, "Lấy dữ liệu thành công!", $data);
+  }
+
+  public function getListGiangDayByHocKyAndMaGiangVien($maHocKy)
+  {
+    $ma_gv = $_SESSION['ma_gv'] ?? null;
+
+    $data = $this->ThongKe->getListGiangDayByHocKyAndMaGiangVien($maHocKy, $ma_gv);
+    return $this->responseHelper->Response(true, "Lấy dữ liệu thành công!", $data);
+  }
+
+  public function getListHocKyByMaGiangVien()
+  {
+    $ma_gv = $_SESSION['ma_gv'] ?? null;
+    $data = $this->ThongKe->getListHocKyByMaGiangVien($ma_gv);
+    return $this->responseHelper->Response(true, "Lấy dữ liệu thành công!", $data);
+  }
+
+  public function getHocKyNewestByMaGiangVien()
+  {
+    $ma_gv = $_SESSION['ma_gv'] ?? null;
+    $data = $this->ThongKe->getHocKyNewestByMaGiangVien($ma_gv);
+    return $this->responseHelper->Response(true, "Lấy dữ liệu thành công!", $data);
+  }
+
+  public function getDetailTongKhoiLuongGiangDayByHocKy($maHocKy)
+  {
+    $ma_gv = $_SESSION['ma_gv'] ?? null;
+    $data = $this->SoSanh->getDetailTongKhoiLuongGiangDayByHocKy($maHocKy, $ma_gv);
+    return $this->responseHelper->Response(true, "Lấy dữ liệu thành công!", $data);
+  }
+
+  public function getTongKhoiLuongMaHocKyMax()
+  {
+    $ma_gv = $_SESSION['ma_gv'] ?? null;
+    $data = $this->SoSanh->getTongKhoiLuongMaHocKyMax($ma_gv);
+    return $this->responseHelper->Response(true, "Lấy dữ liệu thành công!", $data);
+  }
+
+  public function updateXacNhanKhoiLuong($ma_hoc_ky, $xac_nhan)
+  {
+    $ma_gv = $_SESSION['ma_gv'] ?? null;
+    $data = $this->SoSanh->updateXacNhanKhoiLuong($ma_gv, $ma_hoc_ky, $xac_nhan);
+    return $this->responseHelper->Response(true, "Cập nhật thành công!", $data);
+  }
+
+  public function themYeuCauChinhSua()
+  {
+    $ma_gv = $_SESSION['ma_gv'] ?? null;
+    $tieu_de = $_POST['tieu_de'];
+    $thongtin_chinhsua = $_POST['thongtin_chinhsua'];
+    $data = $this->message->themYeuCauChinhSua($ma_gv, $tieu_de, $thongtin_chinhsua);
+    return $this->responseHelper->Response(true, "Thêm yêu cầu chỉnh sửa thành công!", $data);
+  }
+
+  public function getListYeuCauChinhSuaByMaGiangVien()
+  {
+    $ma_gv = $_SESSION['ma_gv'] ?? null;
+    $data = $this->message->getListYeuCauChinhSuaByMaGiangVien($ma_gv);
+    return $this->responseHelper->Response(true, "Lấy dữ liệu thành công!", $data);
+  }
+
+  public function sendNotificationToGiangVien()
+  {
+    $tac_gia = $_SESSION['username'] ?? null;
+    $tieu_de = $_POST['tieu_de'] ?? null;
+    $noi_dung = $_POST['noi_dung'] ?? null;
+    $ma_gv_arr = $_POST['ma_gv_arr'] ?? null;
+    $data = $this->message->sendNotificationToGiangVien($ma_gv_arr, $tieu_de, $noi_dung, $tac_gia);
+    return $this->responseHelper->Response(true, "Gửi thông báo thành công!", $data);
+  }
+
+  public function getListThongBaoByMaGiangVien()
+  {
+    $ma_gv = $_SESSION['ma_gv'] ?? null;
+    $data = $this->message->getListThongBaoByMaGiangVien($ma_gv);
+    return $this->responseHelper->Response(true, "Lấy dữ liệu thành công!", $data);
+  }
+  public function countThongBaoCaNhan()
+  {
+    $ma_gv = $_SESSION['ma_gv'] ?? null;
+    $data = $this->message->countThongBaoCaNhan($ma_gv);
+    return $this->responseHelper->Response(true, "Lấy dữ liệu thành công!", $data);
+  }
 }
 $userController = new UserController();
 $action = isset($_GET['action']) ? $_GET['action'] : '';
@@ -346,5 +454,47 @@ switch ($action) {
   case 'update':
     $userController->checkUpdate();
     $userController->update();
+  case 'getAccountbyMagv':
+    $userController->getAccountbyMagv();
+    break;
+  case 'getListGiangDayByHocKyAndMaGiangVien':
+    $maHocKy = $_GET['maHocKy'] ?? null;
+    $userController->getListGiangDayByHocKyAndMaGiangVien($maHocKy);
+    break;
+  case 'getListHocKyByMaGiangVien':
+    $userController->getListHocKyByMaGiangVien();
+    break;
+  case 'getHocKyNewestByMaGiangVien':
+    $userController->getHocKyNewestByMaGiangVien();
+    break;
+  case 'getDetailTongKhoiLuongGiangDayByHocKy':
+    $maHocKy = $_GET['maHocKy'] ?? null;
+    $userController->getDetailTongKhoiLuongGiangDayByHocKy($maHocKy);
+    break;
+  case 'getTongKhoiLuongMaHocKyMax':
+    $userController->getTongKhoiLuongMaHocKyMax();
+    break;
+  case 'updateXacNhanKhoiLuong':
+    $ma_hoc_ky = $_GET['maHocKy'] ?? null;
+    $xac_nhan = $_GET['xacnhan'] ?? null;
+    $userController->updateXacNhanKhoiLuong($ma_hoc_ky, $xac_nhan);
+    break;
+  case 'themYeuCauChinhSua':
+    $userController->themYeuCauChinhSua();
+    break;
+  case  'getListYeuCauChinhSuaByMaGiangVien':
+    $userController->getListYeuCauChinhSuaByMaGiangVien();
+    break;
+  case 'sendNotificationToGiangVien':
+    $userController->sendNotificationToGiangVien();
+    break;
+  case 'getListThongBaoByMaGiangVien':
+    $userController->getListThongBaoByMaGiangVien();
+    break;
+  case 'countThongBaoCaNhan':
+    $userController->countThongBaoCaNhan();
+    break;
+  default:
+    echo "Action không tồn tại!";
     break;
 }

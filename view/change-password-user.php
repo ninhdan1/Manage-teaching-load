@@ -1,14 +1,8 @@
 <?php
 
-
-
 $content = '
-
-<link href="/css/change-pass.css" rel="stylesheet">
-
-<a class="btn btn-secondary" href="/../view/admin/layout-admin.php">Quay lại</a>
-<div style="margin-bottom:70px">
-
+<a class="btn btn-secondary" href="/../view/thong-ke-canhan.php">Quay lại</a>
+    <div style="margin-bottom:70px">
                         <div>
                             <div class="pass-text">
                                 <p>Đặt lại mật khẩu </p>
@@ -40,4 +34,4 @@ $content = '
 ';
 
 require_once __DIR__ . '/../Helper/ConfigHelper.php';
-include VIEW_PATH . 'admin/layout-admin.php';
+include VIEW_PATH . 'user/layout-user.php';

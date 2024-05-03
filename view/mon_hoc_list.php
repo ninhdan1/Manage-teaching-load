@@ -60,7 +60,7 @@ $content = '
     <div class="mb-3">
     <label for="hoc_ky_monhoc" class="col-form-label">Học kỳ môn học:</label>
     <select class="form-select" id="hoc_ky_monhoc">
-        <option value="null">Chưa xác định</option>
+        <option value="">Chưa xác định</option>
         <option value="1">HK01</option>
         <option value="2">HK02</option>
         <option value="3">HK03</option>
@@ -155,7 +155,7 @@ $content = '
     
 </div>
 <div class="col">
-<span class="badge rounded-pill text-bg-danger mb-3"> <a href="" class="text-decoration-none text-light"> Trang chủ </a></span>
+<span class="badge rounded-pill text-bg-danger mb-3"> <a href="/view/admin/layout-admin.php" class="text-decoration-none text-light"> Trang chủ </a></span>
 <span class="badge rounded-pill text-bg-light mb-3"> <strong> <i class="bi bi-caret-right-fill"></i> </strong> </span>
 <span class="badge rounded-pill text-bg-info mb-3">  Quản lý môn học </span>
 </div>
@@ -172,7 +172,7 @@ $content = '
     <div class="table-responsive">
         <table id="monhocTable" class="table table-hover">
             <thead >
-                <tr class="table-secondary">
+                <tr class="table">
                     <th class="text-center">Mã môn học</th>
                     <th class="text-center">Tên môn học</th>
                     <th class="text-center">Loại môn học</th>

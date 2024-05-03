@@ -7,10 +7,8 @@ $conn = (new DBConnect())->getConnection();
 $user = new User($conn);
 $table = "tai_khoan";
 $columns = "*";
-$users = $user->selectUser($table, $columns);
+$users = $user->selectListAccount($table, $columns);
 
-// $condition = "role = 'user'";
-// $users = $user->selectUser($table, $columns, $condition);
 
 $content = '
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -41,6 +39,7 @@ $content = '
             <th scope="col"></th>
             <th scope="col">Quyền</th>
             <th scope="col">Hoạt động</th>
+            <th scope="col">Giảng viên</th>
             <th scope="col">Hành động</th>
         </tr>
     </thead>
@@ -53,6 +52,7 @@ foreach ($users as $key) {
                     <td><i class="fa fa-eye show-password m-2" style="cursor: pointer;"></i></td>
                     <td>' . ($key['role'] == 'admin' ? '<i class="fas fa-user-shield" style="color: blue;"></i> Admin' : '<i class="fas fa-user" style="color: orange;"></i> User') . '</td>
                     <td>' . ($key['is_active'] == 1 ? '<i class="fas fa-check-circle" style="color: green;"></i> Hoạt động' : '<i class="fas fa-times-circle" style="color: red;"></i> Không hoạt động') . '</td>
+                    <td>' . ($key['ma_gv'] == null ? 'Chưa có' : $key['ho_lot_gv'] . ' ' .  $key['ten_gv']) . '</td>
                     <td>
                         <a class="btn btn-outline-light" style="background-color: #712CF9" href="../view/sua_taikhoan.php?id=' . $key['id'] . '" role="button">Sửa</a>
                         <a class="btn btn-danger" href="../controller/UserController.php?action=delete&id=' . $key['id'] . '" role="button">Xóa</a>
@@ -66,6 +66,7 @@ $content .= '</tbody>
 </div>
 </div>
 <script src="../js/openpassword.js"></script>';
+
 
 
 include '../view/admin/layout-admin.php';

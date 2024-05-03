@@ -1,25 +1,30 @@
 function showModal(mamonhoc) {
-    $.ajax({
-        url: "../controller/monhoccontroller.php?action=detail&ma_monhoc=" + mamonhoc,
-        type: "GET",
-        success: function(response) {
-            if (Array.isArray(response) && response.length > 0) {
-                // Access the first element of the array and populate modal fields
-                var data = response[0];
-                $("#ma_monhoc").val(data.ma_monhoc);
-                $("#ten_monhoc").val(data.ten_monhoc);
-                // Set value for loai_monhoc select element
-                if (data.loai_monhoc !== null) {
-                    $("#loai_monhoc").val(data.loai_monhoc);
-                } else {
-                    $("#loai_monhoc").val("");
-                }
-                
-                $("#EditModal").modal("show");
-            } else {
-                // Handle case where response is empty or not in expected format
-                console.log("Empty or invalid response.");
-            }
-        }
-    });
+  $.ajax({
+    url:
+      "../controller/monhoccontroller.php?action=detail&ma_monhoc=" + mamonhoc,
+    type: "GET",
+    success: function (response) {
+      var data = JSON.parse(response);
+      var result = data.data[0];
+      $("#ma_monhoc").val(result.ma_monhoc);
+      $("#ten_monhoc").val(result.ten_monhoc);
+      // Set value for loai_monhoc select element
+      if (result.loai_monhoc !== null) {
+        $("#loai_monhoc").val(result.loai_monhoc);
+      } else {
+        $("#loai_monhoc").val("");
+      }
+
+      if (result.hoc_ky_monhoc !== null) {
+        $("#hoc_ky_monhoc").val(result.hoc_ky_monhoc);
+      } else {
+        $("#hoc_ky_monhoc").val("");
+      }
+
+      $("#EditModal").modal("show");
+    },
+    error: function (xhr, status, error) {
+      console.error("Error: " + error);
+    },
+  });
 }

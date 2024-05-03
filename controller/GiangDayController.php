@@ -25,9 +25,9 @@ class GiangDayController
         require_once '../view/giang_day_list.php';
     }
 
-    public function getDetailByID($maLopMonHoc)
+    public function getDetailByID($id)
     {
-        $detailData  = $this->model->getDetailByID($maLopMonHoc);
+        $detailData  = $this->model->getDetailByID($id);
         if (is_array($detailData)) {
             header('Content-Type: application/json');
             echo json_encode($detailData);
@@ -39,10 +39,10 @@ class GiangDayController
 
     public function updateSiSo()
     {
-        $maLopMonHoc = $_POST['ma_lopmonhoc'];
+        $id = $_POST['id'];
         $siSo = $_POST['si_solop'];
 
-        $result = $this->model->updateSiSoByID($maLopMonHoc, $siSo);
+        $result = $this->model->updateSiSoByID($id, $siSo);
 
         if ($result) {
             echo "Cập nhật thành công!";
@@ -53,7 +53,7 @@ class GiangDayController
 }
 
 
-// Kiểm tra xem action được gọi là gì và gọi phương thức tương ứng
+
 if (isset($_GET['action'])) {
     $action = $_GET['action'] ?? null;
     $gd = new GiangDayController();
@@ -64,8 +64,8 @@ if (isset($_GET['action'])) {
 
             break;
         case 'detail':
-            $maLopMonHoc = $_GET['ma_lopmonhoc'];
-            $gd->getDetailByID($maLopMonHoc);
+            $id = $_GET['id'];
+            $gd->getDetailByID($id);
             break;
         case 'updateSiSo':
             $gd->updateSiSo();

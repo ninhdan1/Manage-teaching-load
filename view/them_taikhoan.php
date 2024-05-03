@@ -41,7 +41,7 @@ $content .= '</p>
     <label for="role">Chọn quyền</label>
     <select name="role" id="role">
         <option value="admin">Admin</option>
-        <option value="user">User</option>
+        <option value="user" selected>User</option>
     </select><br>
     <label for="">Trạng thái hoạt động</label>
     <select name="status" id="status">

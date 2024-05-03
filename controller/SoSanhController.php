@@ -36,6 +36,18 @@ class SoSanhController
         $result = $this->SoSanh->getListHocKyBy2GiangVien($maGiangVien1, $maGiangVien2);
         return $this->ResponseHelper->response(true, 'Lấy danh sách học kỳ thành công', $result);
     }
+
+    public function getListGiangVienNoExist($maGiangVien)
+    {
+        $result = $this->SoSanh->getListGiangVienNoExist($maGiangVien);
+        return $this->ResponseHelper->response(true, 'Lấy danh sách giảng viên không tồn tại thành công', $result);
+    }
+
+    public function getListTongKhoiLuongGiangDay()
+    {
+        $result = $this->SoSanh->getListTongKhoiLuongGiangDay();
+        return $this->ResponseHelper->response(true, 'Lấy danh sách khối lượng giảng dạy thành công', $result);
+    }
 }
 
 if (isset($_GET['action'])) {
@@ -60,6 +72,14 @@ if (isset($_GET['action'])) {
             $maGiangVien2 = $_GET['ma_gv2'] ?? null;
 
             $controller->getListHocKyBy2GiangVien($maGiangVien1, $maGiangVien2);
+            break;
+        case 'getListGiangVienNoExist':
+            $maGiangVien = $_GET['ma_gv'] ?? null;
+
+            $controller->getListGiangVienNoExist($maGiangVien);
+            break;
+        case 'getListTongKhoiLuongGiangDay':
+            $controller->getListTongKhoiLuongGiangDay();
             break;
         default:
             echo "Action không tồn tại!";

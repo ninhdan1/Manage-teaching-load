@@ -7,7 +7,7 @@ $content = '
 </div>
 
 <div class="col">
-<span class="badge rounded-pill text-bg-danger mb-3"> <a href="" class="text-decoration-none text-light"> Trang chủ </a></span>
+<span class="badge rounded-pill text-bg-danger mb-3"> <a href="/view/admin/layout-admin.php"" class="text-decoration-none text-light"> Trang chủ </a></span>
 <span class="badge rounded-pill text-bg-light mb-3"> <strong> <i class="bi bi-caret-right-fill"></i> </strong> </span>
 <span class="badge rounded-pill text-bg-info mb-3">  Import file </span>
 </div>
@@ -101,6 +101,29 @@ $content = '
 
 $content .= '
 <script>
+
+
+setDefaultHocKy();
+
+function setDefaultHocKy() {
+    var today = new Date();
+    var currentMonth = today.getMonth() + 1; // Tháng hiện tại (1-12)
+
+    var defaultHocKy = 1; // Giá trị mặc định là Học kỳ I
+
+    // Kiểm tra tháng hiện tại để đặt giá trị mặc định cho học kỳ
+    if (currentMonth >= 1 && currentMonth <= 5) {
+        defaultHocKy = 2; // Nếu tháng hiện tại từ tháng 1 đến tháng 5, đặt là Học kỳ II
+    } else if (currentMonth >= 6 && currentMonth <= 7) {
+        defaultHocKy = 3; // Nếu tháng hiện tại từ tháng 6 đến tháng 7, đặt là Học kỳ III
+    }
+
+    // Đặt giá trị mặc định cho select box
+    $("#tenHocKy").val(defaultHocKy);
+}
+
+
+
 function updateNextYear() {
     var currentYear = parseInt(document.getElementById("namHoc").value);
     document.getElementById("namHoc2").value = currentYear + 1;

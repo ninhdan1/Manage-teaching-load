@@ -59,11 +59,42 @@ class User
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  public function getTeacherNoUserUpdate1($teacherId)
+  {
+    $sql = "SELECT * FROM giang_vien WHERE ma_gv NOT IN (SELECT ma_gv FROM tai_khoan WHERE ma_gv IS NOT NULL) OR ma_gv = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([$teacherId]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function Data($table)
   {
     $sql = "SELECT * FROM $table";
     $stmt = $this->conn->prepare($sql);
     $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function selectListAccount($table, $columns, $condition = "", $params = [])
+  {
+    $sql = "SELECT $columns FROM $table";
+    $sql .= " LEFT JOIN giang_vien ON tai_khoan.ma_gv = giang_vien.ma_gv"; // Thực hiện left join giữa bảng tài khoản và bảng môn học
+    if (!empty($condition)) {
+      $sql .= " WHERE $condition";
+    }
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function getAccountByMagv($magv)
+  {
+    $sql = "SELECT tai_khoan.*, giang_vien.* 
+            FROM tai_khoan 
+            JOIN giang_vien ON tai_khoan.ma_gv = giang_vien.ma_gv 
+            WHERE tai_khoan.ma_gv = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([$magv]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 }

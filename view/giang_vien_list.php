@@ -24,7 +24,7 @@ $content = '
                         <div class="col-md-5"> 
                             <div class="mb-3">
                                 <label for="ma_hocky2" class="col-form-label">Chọn học kỳ thứ 2:</label>
-                                <select class="form-select" id="ma_hocky2"></select>
+                                <select class="form-select" id="ma_hocky2""></select>
                             </div>
                         </div>
 
@@ -131,20 +131,22 @@ $content = '
            
                 <form id="soSanhGiangVienForm" class="was-validated">
                     <div class="row">
-                        <div class="col-md-5">
-                            <div class="mb-3">
-                                <label for="ma_hockygiangvien" class="col-form-label">Chọn học kỳ:</label>
-                                <select class="form-select" id="ma_hockygiangvien" disabled>
-                                    <option value="" selected>Chọn học kỳ</option>
-                                </select>
-                            </div>
-                        </div>
+                       
                         <div class="col-md-5"> 
                             <div class="mb-3">
                                 <label for="ma_giangvien" class="col-form-label">Chọn giảng viên:</label>
                                 <select class="form-select" id="ma_giangvien"></select>
                             </div>
                         </div>
+
+                        <div class="col-md-5">
+                        <div class="mb-3">
+                            <label for="ma_hockygiangvien" class="col-form-label">Chọn học kỳ:</label>
+                            <select class="form-select" id="ma_hockygiangvien" disabled>
+                                <option value="" selected>Chọn học kỳ</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="col-md-2 mt-4"> 
                     <div class="mb-3  align-items-center" style=" margin-top: 14px; ">

@@ -44,4 +44,55 @@ class SoSanh
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function getListGiangVienNoExist($maGiangVien)
+    {
+        $sql = "SELECT * FROM giang_vien WHERE ma_gv != ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$maGiangVien]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function getTongKhoiLuongMaHocKyMax($maGiangVien)
+    {
+        $sql = "SELECT * FROM khoiluong_giangday WHERE ma_gv = ? ORDER BY ma_hocky DESC LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$maGiangVien]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public function updateXacNhanKhoiLuong($maGiangVien, $maHocKy, $xacNhan)
+    {
+        // Kiểm tra xác nhận hiện tại của bản ghi
+        $sqlSelect = "SELECT xac_nhan FROM khoiluong_giangday WHERE ma_gv = ? AND ma_hocky = ?";
+        $stmtSelect = $this->conn->prepare($sqlSelect);
+        $stmtSelect->execute([$maGiangVien, $maHocKy]);
+        $currentXacNhan = $stmtSelect->fetchColumn();
+
+        // Nếu xác nhận hiện tại là 0, thì mới cho phép cập nhật
+        if ($currentXacNhan == 0) {
+            // Thực hiện câu lệnh UPDATE
+            $sqlUpdate = "UPDATE khoiluong_giangday SET xac_nhan = ? WHERE ma_gv = ? AND ma_hocky = ?";
+            $stmtUpdate = $this->conn->prepare($sqlUpdate);
+            $stmtUpdate->execute([$xacNhan, $maGiangVien, $maHocKy]);
+            // Trả về số bản ghi được cập nhật
+            return $stmtUpdate->rowCount();
+        } else {
+            // Nếu xác nhận hiện tại không phải là 0, không cho phép cập nhật
+            return 0;
+        }
+    }
+
+    public function getListTongKhoiLuongGiangDay()
+    {
+        $sql = "SELECT kg.*, gv.*, hk.* FROM khoiluong_giangday kg 
+                INNER JOIN giang_vien gv ON kg.ma_gv = gv.ma_gv
+                INNER JOIN hoc_ky hk ON kg.ma_hocky = hk.ma_hocky";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }

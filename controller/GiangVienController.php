@@ -24,6 +24,15 @@ class GiangVienController
         }
         return $this->responseHelper->Response(true, "Lấy dữ liệu thành công!", $data);
     }
+
+    public function getListGiangVienByRoleUser()
+    {
+        $data = $this->model->getListGiangVienByRoleUser();
+        if ($data == null) {
+            return $this->responseHelper->Response(false, "Không có dữ liệu!", null);
+        }
+        return $this->responseHelper->Response(true, "Lấy dữ liệu thành công!", $data);
+    }
 }
 
 if (isset($_GET['action'])) {
@@ -33,6 +42,9 @@ if (isset($_GET['action'])) {
     switch ($action) {
         case 'index':
             $controller->index();
+            break;
+        case 'getListGiangVienByRoleUser':
+            $controller->getListGiangVienByRoleUser();
             break;
         default:
             echo "Action không tồn tại!";

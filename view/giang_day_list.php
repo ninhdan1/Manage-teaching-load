@@ -35,6 +35,11 @@ $content = '
       <form id="updateForm" class="was-validated">
       <div class="row">
       <div class="col-md-6">
+      <div class="mb-3">
+         
+      <label for="id" class="col-form-label">ID:</label>
+      <input type="text" class="form-control" id="id" readonly>
+    </div>
           <div class="mb-3">
          
             <label for="ma_lopmonhoc" class="col-form-label">Mã lớp môn học:</label>
@@ -67,10 +72,7 @@ $content = '
             <input type="text" class="form-control" id="so_tietmonhoc" readonly>
         </div>
 
-          <div class="mb-3">
-            <label for="ten_phong" class="col-form-label">Tên phòng:</label>
-            <input type="text" class="form-control" id="ten_phong" readonly>
-          </div>
+         
          
           </div>
 
@@ -82,6 +84,10 @@ $content = '
           Sĩ số lớp không được để trống và phải là số nguyên dương!
       </div>
         </div>
+        <div class="mb-3">
+        <label for="ten_phong" class="col-form-label">Tên phòng:</label>
+        <input type="text" class="form-control" id="ten_phong" readonly>
+      </div>
           <div class="mb-3">
             <label for="ma_lophoc" class="col-form-label">Mã lớp học:</label>
             <input type="text" class="form-control" id="ma_lophoc" readonly>
@@ -128,7 +134,7 @@ $content = '
     
 </div>
 <div class="col">
-<span class="badge rounded-pill text-bg-danger mb-3"> <a href="" class="text-decoration-none text-light"> Trang chủ </a></span>
+<span class="badge rounded-pill text-bg-danger mb-3"> <a href="/view/admin/layout-admin.php" class="text-decoration-none text-light"> Trang chủ </a></span>
 <span class="badge rounded-pill text-bg-light mb-3"> <strong> <i class="bi bi-caret-right-fill"></i> </strong> </span>
 <span class="badge rounded-pill text-bg-info mb-3">  Danh sách giảng dạy </span>
 </div>
@@ -157,8 +163,21 @@ $content = '
 
 if (isset($data)) {
   foreach ($data as $item) {
+
+    $badge_class = '';
+    if ($item['ten_hocky'] == 1) {
+      $badge_class = 'badge-primary';
+    } elseif ($item['ten_hocky'] == 2) {
+      $badge_class = 'badge-warning';
+    } elseif ($item['ten_hocky'] == 3) {
+      $badge_class = 'badge-dark';
+    } else {
+      $badge_class = 'badge-info';
+    }
+
+
     $content .= '
-                    <tr onclick="showModal(' . $item['ma_lopmonhoc'] . ')">
+                    <tr onclick="showModal(' . $item['id'] . ')">
                         <td class="text-center font-weight-bold ">' . $item['ma_lopmonhoc'] . '</td>
                         <td class="text-center">' . $item['ten_phong'] . '</td>
                         <td class="text-center">' . $item['si_solop'] . '</td>
@@ -167,7 +186,7 @@ if (isset($data)) {
                         <td class="text-center">' . $item['ho_lot_gv'] . ' ' . $item['ten_gv'] . '</td>
                         <td class="text-center">' . $item['ngay_batdau'] . '</td>
                         <td class="text-center">' . $item['tiet_hoc'] . '</td>
-                        <td class="text-center">' . 'HK' . $item['ten_hocky'] . ' ' . $item['nam_hoc'] . ' - ' . ($item['nam_hoc'] + 1) . '</td>
+                        <td class="text-center"><span class="badge ' . $badge_class . '">' . 'HK' . $item['ten_hocky'] . ' ' . $item['nam_hoc'] . ' - ' . ($item['nam_hoc'] + 1) . '</span></td>
                     </tr>';
   }
 } else {
@@ -193,7 +212,7 @@ $(document).ready(function() {
     
   $("#updateForm").submit(function(e) {
       e.preventDefault(); 
-      var maLopMonHoc = $("#ma_lopmonhoc").val();
+      var id = $("#id").val();
       var siSo = $("#si_solop").val();
 
       // Ẩn modal cập nhật
@@ -208,7 +227,7 @@ $(document).ready(function() {
           $.ajax({
               url: "../controller/GiangDayController.php?action=updateSiSo",
               type: "POST",
-              data: { ma_lopmonhoc: maLopMonHoc, si_solop: siSo },
+              data: { id: id, si_solop: siSo },
               success: function(response) {
                   // Ẩn modal xác nhận
                   $("#confirmModal").modal("hide");
